@@ -55,5 +55,6 @@
 	<!--Other plugin dependencies -->
 	<ItemGroup>
 		<Reference Include="$(PluginsFolder)/GTFO-API.dll"/>
+		<Reference Include="$(PluginsFolder)/XpFolder/EndskApi.dll"/>
 	</ItemGroup>
 </Project>

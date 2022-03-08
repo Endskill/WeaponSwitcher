@@ -1,5 +1,6 @@
 ﻿using BepInEx.IL2CPP;
 using System;
+using UnityEngine;
 using WeaponSwitcher.Manager;
 
 namespace WeaponSwitcher
@@ -16,6 +17,14 @@ namespace WeaponSwitcher
         {
             LogManager.SetLogger(Log);
             LogManager._debugMessagesActive = Config.Bind("Dev Settings", "DebugMessages", false, "This settings activates/deactivates debug messages in the console for this specific plugin.").Value;
+
+            EndskApi.Api.InitApi.AddInitCallback(Initialize);
+        }
+
+        public void Initialize()
+        {
+            var gameObj = new GameObject("WeaponSwitcher_Endskill");
+
         }
     }
 }
