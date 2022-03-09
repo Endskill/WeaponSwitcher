@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using WeaponSwitcher.Manager;
+using WeaponSwitcher.Script;
 
 namespace WeaponSwitcher
 {
@@ -24,7 +25,9 @@ namespace WeaponSwitcher
         public void Initialize()
         {
             var gameObj = new GameObject("WeaponSwitcher_Endskill");
+            gameObj.AddComponent<WeaponWheel>();
 
+            UnityEngine.Object.DontDestroyOnLoad(gameObj);
         }
     }
 }
