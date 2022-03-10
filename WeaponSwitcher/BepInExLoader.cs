@@ -6,6 +6,8 @@ using WeaponSwitcher.Script;
 
 namespace WeaponSwitcher
 {
+    [BepInPlugin(GUID, MODNAME, VERSION)]
+    [BepInDependency(EndskApi.BepInExLoader.GUID, BepInDependency.DependencyFlags.HardDependency)]
     public class BepInExLoader : BasePlugin
     {
         public const string

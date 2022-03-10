@@ -9,6 +9,13 @@ namespace WeaponSwitcher.Api
 {
     public static class WeaponSwitchApi
     {
+        public static WeaponInfo GetCurrentWieldedInfo()
+        {
+
+
+            return null;
+        }
+
         public static WeaponInfo GetCurrentWeaponInSlot(InventorySlot inventorySlot)
         {
             var localBackPack = PlayerBackpackManager.LocalBackpack;
@@ -25,6 +32,17 @@ namespace WeaponSwitcher.Api
             }
 
             return new WeaponInfo(backPackItem.GearIDRange, bulletWepaon.GetCurrentClip(), localBackPack.AmmoStorage.GetInventorySlotAmmo(bulletWepaon.AmmoType));
+        }
+
+        public static WeaponInfo GetOldWeaponAndPutNewIntoInventory(WeaponInfo info)
+        {
+            var oldWeapon = GetCurrentWeaponInSlot(info.Slot);
+            if(oldWeapon is null)
+            {
+                throw new NullReferenceException("old weapon from \"GetCurrentWeaponInSlot(...)\" returned null!");
+            }
+            PutWeaponIntoInventory(info);
+            return oldWeapon;
         }
 
         public static void PutWeaponIntoInventory(WeaponInfo info)
