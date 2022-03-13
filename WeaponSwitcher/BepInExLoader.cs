@@ -1,7 +1,10 @@
-﻿using BepInEx.IL2CPP;
-using System;
-using UnityEngine;
+﻿using BepInEx;
+using BepInEx.IL2CPP;
+using HarmonyLib;
+using Player;
+using UnhollowerRuntimeLib;
 using WeaponSwitcher.Manager;
+using WeaponSwitcher.Model;
 using WeaponSwitcher.Script;
 
 namespace WeaponSwitcher
@@ -21,15 +24,10 @@ namespace WeaponSwitcher
             LogManager.SetLogger(Log);
             LogManager._debugMessagesActive = Config.Bind("Dev Settings", "DebugMessages", false, "This settings activates/deactivates debug messages in the console for this specific plugin.").Value;
 
-            EndskApi.Api.InitApi.AddInitCallback(Initialize);
-        }
+            ScriptManager.Setup();
 
-        public void Initialize()
-        {
-            var gameObj = new GameObject("WeaponSwitcher_Endskill");
-            gameObj.AddComponent<WeaponWheel>();
-
-            UnityEngine.Object.DontDestroyOnLoad(gameObj);
+            ClassInjector.RegisterTypeInIl2Cpp<WeaponWheel>();
+            new Harmony(GUID).PatchAll();
         }
     }
 }
